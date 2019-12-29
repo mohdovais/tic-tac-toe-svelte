@@ -10,7 +10,7 @@
     button {
         font-size: 1rem;
         border: 1px solid #ddd;
-        background-color: #eee;
+        background-color: rgba(238, 238, 238, 0.5);
         border-radius: 3px;
         padding: 0.5rem 0.75rem;
     }

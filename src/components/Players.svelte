@@ -10,7 +10,9 @@
 
 <div class="c">
     <div>Next Move: <span>Player {@html $store.player}</span></div>
+    {#if $store.history.length !== 0}
     <Button onClick="{undo}">Undo Last Move</Button>
+    {/if}
 </div>
 
 <style>
