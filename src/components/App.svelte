@@ -11,7 +11,7 @@
 </script>
 
 <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" width="300" height="300">
-    <Board store="{store}" hide="{$store.finished}" />
+    <Board store="{store}" hide="{$store.finished}"/>
     {#if $store.finished}
     <Result store="{store}" />
     {/if}
@@ -19,7 +19,9 @@
 {#if !$store.finished}
 <Players store="{store}" />
 {/if}
+{#if $store.history.length > 0}
 <Reset store="{store}" />
+{/if}
 
 
 <style>
@@ -40,6 +42,5 @@
         min-width: 100%;
         height: auto;
         max-height: 100vh;
-        box-shadow: 0 0 0 1px red;
     }
 </style>

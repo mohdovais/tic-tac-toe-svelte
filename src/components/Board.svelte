@@ -18,7 +18,7 @@
     }
 </script>
 
-<g class:hide="{hide}">
+<g class:hide="{hide}" aria-hidden="{$store.finished}">
     <Grid />
     <g fill="transparent">
         {#each $store.board as label, index}
