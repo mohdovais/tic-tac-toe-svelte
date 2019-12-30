@@ -8,6 +8,7 @@
     import { EMPTY_STRING, CROSS, CIRCLE } from '../constants';
 
     export let store;
+    export let hide = false;
 
     function onClick(position) {
         store.dispatch({
@@ -17,10 +18,10 @@
     }
 </script>
 
-<g>
+<g class:hide="{hide}">
     <Grid />
     <g fill="transparent">
-    {#each $store.board as label, index}
+        {#each $store.board as label, index}
         {#if label === EMPTY_STRING}
             <Button x="{(index %3) * 100}" y="{Math.floor(index /3) * 100}" onClick="{()=> onClick(index)}" />
         {/if}
@@ -36,3 +37,25 @@
         <Strike pattern="{$store.winningPattern}" />
     {/if}
 </g>
+
+<style>
+g {
+    transform: scale(1);
+    transform-origin: center top;
+    will-change: transform;
+    transition: all 0.3s ease-in;
+}
+.hide {
+    transform: scale(0);
+    --animation: hide 300ms ease-in;
+}
+
+@keyframes hide {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(0);
+  }
+}</style>

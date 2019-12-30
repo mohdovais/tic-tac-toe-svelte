@@ -5,22 +5,26 @@
 
     export let x = 0;
     export let y = 0;
+    export let animate = true;
+
     const duration = ANIMATION_TIME / 2;
-    const x12 = createTweenedStore(x + 75);
-    const y12 = createTweenedStore(y + 25);
-    const x22 = createTweenedStore(x + 25);
-    const y22 = createTweenedStore(y + 25);
+    const x12 = createTweenedStore(x + (animate ? 75 : 25));
+    const y12 = createTweenedStore(y + (animate ? 25 : 75));
+    const x22 = createTweenedStore(x + (animate ? 25 : 75));
+    const y22 = createTweenedStore(y + (animate ? 25 : 75));
 
     onMount(() => {
-        $x12 = x + 25;
-        $y12 = y + 75;
+        if (animate) {
+            $x12 = x + 25;
+            $y12 = y + 75;
 
-        const timeout = setTimeout(() => {
-            $x22 = x + 75;
-            $y22 = y + 75;
-        }, duration);
+            const timeout = setTimeout(() => {
+                $x22 = x + 75;
+                $y22 = y + 75;
+            }, duration);
 
-        return () => clearTimeout(timeout);
+            return () => clearTimeout(timeout);
+        }
     });
 </script>
 

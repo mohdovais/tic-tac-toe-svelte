@@ -17,7 +17,7 @@ export const ACTION_TYPE_UNDO = 2;
 export function reducer(state, action) {
   switch (action.type) {
     case ACTION_TYPE_SELECT:
-      return state.finished ? reset() : select(state, action.position);
+      return state.finished ? state : select(state, action.position);
     case ACTION_TYPE_RESET:
       return reset();
     case ACTION_TYPE_UNDO:

@@ -1,47 +1,80 @@
-const cos = Math.cos;
-const sin = Math.sin;
-const π = Math.PI;
+export var _Math = Math;
+export var random = _Math.random;
 
-const f_matrix_times = ([[a, b], [c, d]], [x, y]) => [
-  a * x + b * y,
-  c * x + d * y
-];
-const f_rotate_matrix = x => [
-  [cos(x), -sin(x)],
-  [sin(x), cos(x)]
-];
-const f_vec_add = ([a1, a2], [b1, b2]) => [a1 + b1, a2 + b2];
+function round(number, precisionTo) {
+  var precision = _Math.pow(10, precisionTo || 0);
+  return _Math.round(number * precision) / precision;
+}
 
-/*
-returns a SVG path element that represent a ellipse.
-cx,cy → center of ellipse
-rx,ry → major minor radius
-t1 → start angle, in radian.
-Δ → angle to sweep, in radian. positive.
-φ → rotation on the whole, in radian
-url: SVG Circle Arc http://xahlee.info/js/svg_circle_arc.html
-Version 2019-06-19
-*/
-export const f_svg_ellipse_arc = ([cx, cy], [rx, ry], [t1, Δ], φ) => {
-  Δ = Δ % (2 * π);
-  const rotMatrix = f_rotate_matrix(φ);
-  const [sX, sY] = f_vec_add(
-    f_matrix_times(rotMatrix, [rx * cos(t1), ry * sin(t1)]),
-    [cx, cy]
-  );
-  const [eX, eY] = f_vec_add(
-    f_matrix_times(rotMatrix, [rx * cos(t1 + Δ), ry * sin(t1 + Δ)]),
-    [cx, cy]
-  );
-  const fA = Δ > π ? 1 : 0;
-  const fS = Δ > 0 ? 1 : 0;
+/**
+ *
+ * @param {Number} degree
+ * @returns {Number} radian
+ */
+function radian(degree) {
+  return (degree * _Math.PI) / 180 || 0;
+}
 
-  return (
-    "M " +
-    sX +
-    " " +
-    sY +
-    " A " +
-    [rx, ry, (φ / (2 * π)) * 360, fA, fS, eX, eY].join(" ")
-  );
-};
+/**
+ *
+ * @param {Number} cx X coordinate of center of circle
+ * @param {Number} cy Y coordinate of center of circle
+ * @param {Number} radius Radius of circle
+ * @param {Number} degree Angle in Degrees for seeking point
+ * @returns {Object} {x,y} coordinates
+ */
+function getArcPoint(cx, cy, radius, degree) {
+  var theta = radian(degree);
+  return {
+    x: round(cx + radius * _Math.cos(theta), 2),
+    y: round(cy + radius * _Math.sin(theta), 2)
+  };
+}
+
+/**
+ *
+ * @param {Number} cx X coordinate of center of circle
+ * @param {Number} cy Y coordinate of center of circle
+ * @param {Number} radius Radius of circle
+ * @param {Number} startDegree Arc start angle in Degrees
+ * @param {Number} endDegree Arc end angle in Degrees
+ * @returns {String} SVG path definition `d`
+ */
+function doArc(cx, cy, radius, startDegree, endDegree) {
+  const start = getArcPoint(cx, cy, radius, startDegree);
+  const end = getArcPoint(cx, cy, radius, endDegree);
+  const largeArcFlag = _Math.abs(endDegree - startDegree) > 180 ? 1 : 0;
+  let sweepFlag = 1;
+  const M = `M ${start.x} ${start.y}`;
+  const A = [
+    "A",
+    radius,
+    radius,
+    "0",
+    largeArcFlag,
+    sweepFlag,
+    end.x,
+    end.y
+  ].join(" ");
+
+  return M + A;
+}
+
+/**
+ *
+ * @param {Number} cx X coordinate of center of circle
+ * @param {Number} cy Y coordinate of center of circle
+ * @param {Number} radius Radius of circle
+ * @param {Number} startDegree Arc start angle in Degrees
+ * @param {Number} endDegree Arc end angle in Degrees
+ * @returns {String} SVG path definition `d`
+ */
+export function arc(cx, cy, radius, startDegree, endDegree) {
+  if (endDegree > 359) {
+    return (
+      doArc(cx, cy, radius, startDegree, 359) +
+      doArc(cx, cy, radius, 359, endDegree)
+    );
+  }
+  return doArc(cx, cy, radius, startDegree, endDegree);
+}
