@@ -6,7 +6,8 @@ export const initialState = {
   winningPattern: [],
   finished: false,
   player: CROSS,
-  board: new Array(9).join("|").split("|")
+  board: new Array(9).join("|").split("|"),
+  history: []
 };
 
 export const ACTION_TYPE_SELECT = 0;
@@ -16,7 +17,7 @@ export const ACTION_TYPE_UNDO = 2;
 export function reducer(state, action) {
   switch (action.type) {
     case ACTION_TYPE_SELECT:
-      return state.finished ? reset() : select(state, action.position);
+      return state.finished ? state : select(state, action.position);
     case ACTION_TYPE_RESET:
       return reset();
     case ACTION_TYPE_UNDO:
@@ -24,8 +25,6 @@ export function reducer(state, action) {
   }
   return state;
 }
-
-let history = [];
 
 function select(state, position) {
   let { board, player, winner, winningPattern, finished } = state;
@@ -35,7 +34,7 @@ function select(state, position) {
   }
 
   // maintain history
-  history.push({ board, player });
+  state.history.push({ board, player });
 
   board = board.slice();
   board[position] = player;
@@ -53,11 +52,11 @@ function select(state, position) {
 }
 
 function reset() {
-  history = [];
+  initialState.history = [];
   return initialState;
 }
 
 function undo(state) {
-  const game = history.pop();
+  const game = state.history.pop();
   return game === undefined ? state : Object.assign({}, initialState, game);
 }

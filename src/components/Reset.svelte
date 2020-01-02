@@ -1,14 +1,10 @@
 <script>
-    import { ACTION_TYPE_RESET } from '../state';
     import Button from './Button.svelte';
-    export let store;
-
-    const reset = () => store.dispatch({ type: ACTION_TYPE_RESET });
-    $: RESET = $store.finished ? 'New ' : 'Reset ';
+    export let onReset;
 </script>
 
 <div>
-    <Button onClick="{reset}">{RESET}Game</Button>
+    <Button onClick="{onReset}">New Game</Button>
 </div>
 
 <style>
