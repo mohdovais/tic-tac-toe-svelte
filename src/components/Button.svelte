@@ -1,8 +1,9 @@
 <script>
     export let onClick;
+    export let hidden = false;
 </script>
 
-<button type="button" on:click="{onClick}">
+<button type="button" on:click="{onClick}" class:hidden>
     <slot></slot>
 </button>
 
@@ -23,5 +24,9 @@
 
     button * {
         pointer-events: none;
+    }
+
+    .hidden {
+        visibility: hidden;
     }
 </style>
