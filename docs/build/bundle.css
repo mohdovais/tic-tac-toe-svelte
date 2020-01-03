@@ -1,9 +1,9 @@
 body{min-height:100vh;background-color:#14bdac;padding:0;margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:left}svg.svelte-1k3foh7{width:100%;height:auto;max-height:100vh}.app.svelte-1k3foh7{display:flex}.board.svelte-1k3foh7{flex:1}@media(orientation: landscape){.app.svelte-1k3foh7{flex-direction:row}}@media(orientation: portrait){.app.svelte-1k3foh7{flex-direction:column}}
-.c.svelte-3heq98{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1.25rem;margin:0.5rem 0}svg.svelte-3heq98{vertical-align:middle}
-div.svelte-1fty1b4{padding:1em;text-align:center}
 g.svelte-1ou6dhf{transform:translateY(100%);transform-origin:center top;will-change:transform;transition:all 0.3s ease-in;transition-delay:1s}.show.svelte-1ou6dhf{transform:translateY(0)}text.svelte-1ou6dhf{font-size:4rem;font-weight:700}
-rect.svelte-152zdin{cursor:pointer}
-button.svelte-1ylnz8n{font-size:1rem;border:1px solid rgba(238, 238, 238, 0.3);background-color:rgba(238, 238, 238, 0.5);border-radius:3px;padding:0.5rem 0.75rem;cursor:pointer}button.svelte-1ylnz8n:focus{border-color:#fff;background-color:rgba(238, 238, 238, 0.7)}button.svelte-1ylnz8n .svelte-1ylnz8n{pointer-events:none}.hidden.svelte-1ylnz8n{visibility:hidden}
+div.svelte-1fty1b4{padding:1em;text-align:center}
+.c.svelte-3heq98{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1.25rem;margin:0.5rem 0}svg.svelte-3heq98{vertical-align:middle}
 g.svelte-i34k5a{transform:translateY(0);transform-origin:center top;will-change:transform;transition:all 0.3s ease-in;transition-delay:1s}.hide.svelte-i34k5a{transform:translateY(-100%)}
+button.svelte-1ylnz8n{font-size:1rem;border:1px solid rgba(238, 238, 238, 0.3);background-color:rgba(238, 238, 238, 0.5);border-radius:3px;padding:0.5rem 0.75rem;cursor:pointer}button.svelte-1ylnz8n:focus{border-color:#fff;background-color:rgba(238, 238, 238, 0.7)}button.svelte-1ylnz8n .svelte-1ylnz8n{pointer-events:none}.hidden.svelte-1ylnz8n{visibility:hidden}
+rect.svelte-152zdin{cursor:pointer}
 
 /*# sourceMappingURL=bundle.css.map */
